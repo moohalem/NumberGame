@@ -1,10 +1,28 @@
 import scala.util.Random
 import scala.io.StdIn
+import scala.util.{Try, Success, Failure}
 
 def randomGenerator(max: Int): Int = {
   val rng = new Random()
   val n = rng.nextInt(1+(max))
   n
+}
+
+def readIntSafe(prompt: String): Int = {
+  var valid = false
+  var result = 0
+  while (!valid) {
+    print(prompt)
+    val input = StdIn.readLine()
+    Try(input.toInt) match {
+      case Success(value) =>
+        result = value
+        valid = true
+      case Failure(_) =>
+        println("Invalid input. Please enter a valid number.")
+    }
+  }
+  result
 }
 
 @main def hello(): Unit =
@@ -22,8 +40,7 @@ def randomGenerator(max: Int): Int = {
     println()
     println(s"Your credit is $credit")
     println("---------------------------------------")
-    println(s"Please input your number (1 - $max)")
-    val userGuess = StdIn.readInt()
+    val userGuess = readIntSafe(s"Please input your number (1 - $max): ")
     
     if (userGuess != random){
       println(s"I'm sorry your guess' is not correct. The correct answer is $random")

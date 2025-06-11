@@ -14,6 +14,7 @@ project/local-plugins.sbt
 .ensime_cache/
 .sbt-scripted/
 local.sbt
+.scala-build/
 
 # Bloop
 .bsp
@@ -30,3 +31,6 @@ metals.sbt
 .idea
 .idea_modules
 /.worksheet/
+
+# Ignore scala-build in main scala source
+src/main/scala/.scala-build
